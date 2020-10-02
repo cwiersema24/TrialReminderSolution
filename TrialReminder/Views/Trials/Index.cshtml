@@ -1,0 +1,37 @@
+﻿@model TrialsSummaryModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h2>Your Trials</h2>
+<ul>
+    @foreach (var trial in Model.Trials)
+    {
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">@trial.ServiceName</h5>
+            <h6 class="card-subtitle mb-2 text-muted">You have a trial at @trial.ServiceName</h6>
+            <h6 class="card-subtitle mb-2 text-muted">They are at @trial.Url</h6>
+            @if (trial.HasStartDate)
+            {
+                <p>Your trial started on @trial.StartDate.ToShortDateString()</p>
+            }
+            @if (trial.HasEndDate)
+            {
+                <p>Your trial ends on @trial.EndDate.ToShortDateString()</p>
+            }
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+    </div>
+    }
+<div class="alert alert-info">
+    <h4>You have @Model.NumberOfCurrentTrials current trials.</h4>
+    <h4>There are @Model.NumberOfExpiredTrials expired trials.</h4>
+</div>
+</ul>
+
+<div>
+    <a class="btn btn-primary" asp-controller="Trials" asp-action="New">Add Another Service</a>
+</div>
